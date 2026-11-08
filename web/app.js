@@ -1,5 +1,5 @@
 // ============================================================================
-// 🌸 SAKURA TOEIC 650+ ACADEMY - MAIN APPLICATION LOGIC (GITHUB PAGES + LOCAL)
+// 🌸 SAKURA TOEIC 650+ ACADEMY - MAIN APPLICATION LOGIC (EYE-FRIENDLY EDITION)
 // ============================================================================
 
 const PART_RANGES = {
@@ -19,7 +19,7 @@ const MASCOT_TIPS = [
   '⚡ Mẹo Part 3 & 4: Hãy tận dụng 8 giây đọc hướng dẫn để đọc trước 3 câu hỏi và gạch chân từ khóa trước khi băng phát!',
   '📖 Mẹo Part 5: Nhìn ngay từ đứng trước và sau chỗ trống! Nếu trước là mạo từ (a/an/the) hoặc tính từ sở hữu thì điền Danh từ (Noun) nhé!',
   '✍️ Mẹo TOEIC Writing: Ở phần Viết Email (Q6–7), hãy luôn đảm bảo trả lời đủ cả 3 yêu cầu trong đề bài và dùng các cụm "I am writing to...", "Could you please..." nhé!',
-  '🎹 Bạn có thể bật "Nhạc Anime" trên thanh công cụ để vừa giải Reading & Writing vừa thư giãn với giai điệu Music Box dễ thương đó~ ✨'
+  '🎹 Bạn có thể bật "Nhạc" trên thanh công cụ để vừa giải Reading & Writing vừa thư giãn với giai điệu Music Box dễ thương đó~ ✨'
 ];
 
 const RANKS = [
@@ -39,6 +39,7 @@ const App = {
   currentDocType: 'lc',
   omrPartFilter: 'all',
   instantGrade: false,
+  petalsEnabled: true,
 
   // Reading & Writing Studio State
   rwMode: 'p5',
@@ -75,10 +76,8 @@ const App = {
     this.initSakuraCanvas();
     this.updateRpgHeader();
 
-    // Load static catalog first so GitHub Pages works instantaneously
     this.catalog = window.TOEIC_STATIC_CATALOG || null;
 
-    // If running locally with node server.js, try fetching live catalog if static wasn't loaded
     if (!this.catalog) {
       try {
         const res = await fetch('./api/catalog');
@@ -114,6 +113,67 @@ const App = {
     } catch (e) {
       console.warn('Could not save state:', e);
     }
+  },
+
+  // ==========================================================================
+  // MASTER & SECTION RESET FUNCTIONS
+  // ==========================================================================
+  resetAllProgress() {
+    AnimeSound.click();
+    if (!confirm('🔄 Bạn có chắc muốn Reset toàn bộ lịch sử làm đề, điểm số, EXP và các bài Đọc/Viết về trạng thái ban đầu không?')) {
+      return;
+    }
+
+    localStorage.removeItem('sakura_toeic_state_v1');
+    this.state = {
+      exp: 0,
+      questionsChecked: 0,
+      questionsCorrect: 0,
+      savedTests: {}
+    };
+    this.rwAnswers = {};
+    this.rwDrafts = {};
+    this.drillAnswers = {};
+    const notesEl = document.getElementById('drill-notes');
+    if (notesEl) notesEl.value = '';
+
+    this.resetExamTimer(false);
+    this.updateRpgHeader();
+    this.renderDashboard();
+    this.loadExamTest(this.currentEdition, this.currentTest, false);
+    this.renderRwStage();
+    this.renderDrillQuestions();
+
+    this.mascotSay('🔄 Đã Reset toàn bộ dữ liệu học tập về trạng thái mới tinh! Chúng mình cùng bắt đầu hành trình mới nhé Senpai! 🌸');
+  },
+
+  resetRwAll() {
+    AnimeSound.click();
+    this.rwAnswers = {};
+    this.rwDrafts = {};
+    this.rwShowTrans = {};
+    this.renderRwStage();
+    this.mascotSay('🔄 Đã làm mới toàn bộ phần Luyện Đọc & Viết! Senpai có thể thử sức lại từ đầu rồi nha! ✨');
+  },
+
+  resetRwCurrentSet(prefix) {
+    AnimeSound.click();
+    Object.keys(this.rwAnswers).forEach(k => {
+      if (k.startsWith(prefix)) delete this.rwAnswers[k];
+    });
+    this.renderRwStage();
+    this.mascotSay('🔄 Đã xóa các câu trả lời của bài đọc hiện tại để bạn làm lại! 🌸');
+  },
+
+  resetWritingDraft(draftId, inputId, feedbackId) {
+    AnimeSound.click();
+    delete this.rwDrafts[draftId];
+    const inp = document.getElementById(inputId);
+    if (inp) inp.value = '';
+    const fb = document.getElementById(feedbackId);
+    if (fb) fb.innerHTML = '';
+    this.renderRwStage();
+    this.mascotSay('🔄 Đã xóa trắng bài viết hiện tại! Hãy thử viết một cách diễn đạt mới nhé Senpai! ✍️');
   },
 
   addExp(amount, reasonMsg) {
@@ -178,13 +238,19 @@ const App = {
     AnimeSound.click();
     document.body.classList.toggle('night-mode');
     const isNight = document.body.classList.contains('night-mode');
-    document.getElementById('btn-theme-toggle').textContent = isNight ? '☀️' : '🌙';
+    document.getElementById('btn-theme-toggle').textContent = isNight ? '☀️ Sáng' : '🌙 Đêm';
+  },
+
+  togglePetals(enabled) {
+    this.petalsEnabled = enabled;
+    const canvas = document.getElementById('sakura-canvas');
+    if (canvas) canvas.style.display = enabled ? 'block' : 'none';
   },
 
   toggleBgm() {
     const on = AnimeSound.toggleBgm();
     const btn = document.getElementById('btn-bgm-toggle');
-    btn.textContent = on ? '🎵 Nhạc Anime: BẬT' : '🎵 Nhạc Anime: TẮT';
+    btn.textContent = on ? '🎵 Nhạc: BẬT' : '🎵 Nhạc: TẮT';
     btn.classList.toggle('active-toggle', on);
     if (on) {
       this.mascotSay('🎹 Đã bật nhạc nền Anime Music Box êm dịu~ Chúc Senpai học thật vào nhé! 🌸');
@@ -212,8 +278,8 @@ const App = {
     const bubble = document.getElementById('mascot-bubble');
     if (el) el.textContent = text;
     if (bubble) {
-      bubble.style.transform = 'scale(1.06)';
-      setTimeout(() => { bubble.style.transform = 'scale(1)'; }, 220);
+      bubble.style.transform = 'scale(1.04)';
+      setTimeout(() => { bubble.style.transform = 'scale(1)'; }, 200);
     }
     if (playVoice) AnimeSound.mascotSpeak();
   },
@@ -258,13 +324,15 @@ const App = {
   renderRwPart5(stage) {
     const list = window.TOEIC_RW_DATA.part5 || [];
     let html = `
-      <div class="rw-card" style="background:linear-gradient(90deg, var(--sakura-light), var(--lavender-light));">
+      <div class="rw-card" style="background:var(--bg-secondary);">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
           <div>
-            <h3 style="font-size:1.2rem;">⚡ Luyện Đọc Part 5: Điền Câu Ngữ Pháp & Từ Vựng Tốc Độ</h3>
-            <p style="font-size:0.86rem;">Chọn đáp án A/B/C/D để nghe âm thanh <em>Pin-Pon!</em> và xem giải thích ngữ pháp + từ vựng chi tiết từ Hina-sensei!</p>
+            <h3 style="font-size:1.15rem;">⚡ Luyện Đọc Part 5: Điền Câu Ngữ Pháp & Từ Vựng Trọng Tâm (12 Câu)</h3>
+            <p style="font-size:0.86rem; color:var(--text-muted);">Chọn đáp án A/B/C/D để xem giải thích ngữ pháp + từ vựng chi tiết từ Hina-sensei!</p>
           </div>
-          <button class="mini-btn" onclick="App.rwAnswers={}; App.renderRwStage();">🔄 Làm lại tất cả</button>
+          <button class="btn-anime btn-reset" style="padding:7px 14px; font-size:0.82rem;" onclick="App.resetRwCurrentSet('p5_')">
+            🔄 Reset Part 5
+          </button>
         </div>
       </div>
     `;
@@ -303,8 +371,9 @@ const App = {
         <div class="rw-card">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
             <span class="edition-badge">Câu ${101 + idx} • ${item.topic}</span>
+            ${chosen ? `<button class="mini-btn mini-reset" onclick="delete App.rwAnswers['${item.id}']; AnimeSound.click(); App.renderRwStage();">🔄 Làm lại câu này</button>` : ''}
           </div>
-          <p style="font-size:1.04rem; font-weight:800; margin-bottom:12px; line-height:1.5;">
+          <p style="font-size:1.02rem; font-weight:800; margin-bottom:12px; line-height:1.55;">
             ${item.question}
           </p>
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:8px;">
@@ -369,9 +438,14 @@ const App = {
     stage.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
         <div style="display:flex; gap:8px; flex-wrap:wrap;">${navBtns}</div>
-        <button class="btn-anime btn-secondary" style="padding:7px 15px; font-size:0.84rem;" onclick="App.toggleRwTrans('${set.id}')">
-          🇻🇳 ${showTrans ? 'Ẩn Bản Dịch Song Ngữ' : 'Hiện Bản Dịch Song Ngữ'}
-        </button>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn-anime btn-secondary" style="padding:7px 14px; font-size:0.83rem;" onclick="App.toggleRwTrans('${set.id}')">
+            🇻🇳 ${showTrans ? 'Ẩn Bản Dịch Song Ngữ' : 'Hiện Bản Dịch Song Ngữ'}
+          </button>
+          <button class="btn-anime btn-reset" style="padding:7px 14px; font-size:0.83rem;" onclick="App.resetRwCurrentSet('${set.id}_')">
+            🔄 Reset Đoạn Văn Này
+          </button>
+        </div>
       </div>
 
       <div class="rw-split-grid">
@@ -449,9 +523,14 @@ const App = {
     stage.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
         <div style="display:flex; gap:8px; flex-wrap:wrap;">${navBtns}</div>
-        <button class="btn-anime btn-secondary" style="padding:7px 15px; font-size:0.84rem;" onclick="App.toggleRwTrans('${set.id}')">
-          🇻🇳 ${showTrans ? 'Ẩn Bản Dịch Song Ngữ' : 'Hiện Bản Dịch Song Ngữ'}
-        </button>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn-anime btn-secondary" style="padding:7px 14px; font-size:0.83rem;" onclick="App.toggleRwTrans('${set.id}')">
+            🇻🇳 ${showTrans ? 'Ẩn Bản Dịch Song Ngữ' : 'Hiện Bản Dịch Song Ngữ'}
+          </button>
+          <button class="btn-anime btn-reset" style="padding:7px 14px; font-size:0.83rem;" onclick="App.resetRwCurrentSet('${set.id}_')">
+            🔄 Reset Bài Đọc Này
+          </button>
+        </div>
       </div>
 
       <div class="rw-split-grid">
@@ -512,15 +591,20 @@ const App = {
       <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">${navBtns}</div>
 
       <div class="rw-card">
-        <span class="edition-badge">TOEIC WRITING PART 1 (QUESTIONS 1–5) • THANG ĐIỂM 0–3</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <span class="edition-badge">TOEIC WRITING PART 1 (QUESTIONS 1–5) • THANG ĐIỂM 0–3</span>
+          <button class="mini-btn mini-reset" onclick="App.resetWritingDraft('${item.id}', 'inp-writing-pic', 'writing-pic-feedback')">
+            🔄 Reset Câu Này
+          </button>
+        </div>
         <h3 style="margin:8px 0;">${item.title}</h3>
-        <div style="background:linear-gradient(135deg, var(--sakura-light), var(--lavender-light)); border:2.5px solid var(--border-anime); border-radius:16px; padding:20px; margin:12px 0; display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
-          <div style="font-size:3.2rem; background:#fff; border:2.5px solid var(--border-anime); border-radius:16px; padding:12px 18px; box-shadow:var(--shadow-anime-sm);">
+        <div style="background:var(--bg-secondary); border:1.5px solid var(--border-anime); border-radius:14px; padding:18px; margin:12px 0; display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
+          <div style="font-size:3rem; background:var(--bg-card); border:1.5px solid var(--border-anime); border-radius:14px; padding:12px 18px;">
             ${item.sceneIcon}
           </div>
           <div style="flex:1; min-width:240px;">
             <strong style="font-size:0.95rem;">📸 Mô tả ngữ cảnh bức tranh:</strong>
-            <p style="font-size:0.92rem; margin-top:4px; line-height:1.5;">${item.sceneDesc}</p>
+            <p style="font-size:0.92rem; margin-top:4px; line-height:1.55;">${item.sceneDesc}</p>
             <div style="margin-top:10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
               <span style="font-weight:900; font-size:0.86rem;">🔑 2 từ bắt buộc phải có trong câu:</span>
               <span class="keyword-badge">${item.word1}</span>
@@ -541,6 +625,9 @@ const App = {
           </button>
           <button class="btn-anime btn-secondary" onclick="document.getElementById('inp-writing-pic').value='${item.sampleAnswers[0].replace(/'/g, "\\'")}'; App.rwDrafts['${item.id}']=document.getElementById('inp-writing-pic').value; AnimeSound.click();">
             🪄 Điền Thử Câu Mẫu Điểm Tuyệt Đối
+          </button>
+          <button class="btn-anime btn-reset" onclick="App.resetWritingDraft('${item.id}', 'inp-writing-pic', 'writing-pic-feedback')">
+            🔄 Xóa Viết Lại
           </button>
         </div>
 
@@ -586,7 +673,7 @@ const App = {
 
     box.innerHTML = `
       <div class="writing-feedback-box">
-        <div style="font-size:1.05rem; font-weight:900; margin-bottom:8px;">
+        <div style="font-size:1.02rem; font-weight:900; margin-bottom:8px;">
           🎯 Kết quả đánh giá của Hina-sensei: <span style="color:var(--sakura-pink);">${score} / 3 Điểm</span> (${wordCount} từ)
         </div>
         <ul style="padding-left:20px; font-size:0.88rem; line-height:1.65; font-weight:700;">
@@ -662,6 +749,9 @@ const App = {
             <button class="btn-anime btn-secondary" onclick="App.loadSampleEmail()">
               📖 Xem & Điền Bài Mẫu 4/4 Điểm
             </button>
+            <button class="btn-anime btn-reset" onclick="App.resetWritingDraft('${task.id}', 'inp-writing-email', 'writing-email-feedback')">
+              🔄 Reset Email Này
+            </button>
           </div>
 
           <div id="writing-email-feedback"></div>
@@ -730,7 +820,7 @@ const App = {
 
     box.innerHTML = `
       <div class="writing-feedback-box">
-        <div style="font-size:1.05rem; font-weight:900; margin-bottom:8px;">
+        <div style="font-size:1.02rem; font-weight:900; margin-bottom:8px;">
           🎯 Điểm Email TOEIC Writing: <span style="color:var(--sakura-pink);">${finalScore} / 4 Điểm</span> (${words} từ)
         </div>
         <ul style="padding-left:20px; font-size:0.86rem; line-height:1.65; font-weight:700;">
@@ -768,7 +858,7 @@ const App = {
       <div class="rw-card">
         <span class="edition-badge">TOEIC WRITING PART 3 (QUESTION 8) • 30 PHÚT • MỤC TIÊU 200–300 TỪ</span>
         <h3 style="margin:8px 0;">${topic.title}</h3>
-        <div class="passage-box" style="background:linear-gradient(135deg, var(--sakura-light), var(--lavender-light)); font-weight:800;">
+        <div class="passage-box" style="background:var(--bg-secondary); font-weight:800;">
           📋 Prompt: "${topic.prompt}"
         </div>
 
@@ -792,6 +882,9 @@ const App = {
           </button>
           <button class="btn-anime btn-secondary" onclick="App.loadSampleEssay()">
             📖 Xem & Điền Bài Luận Mẫu Band 200
+          </button>
+          <button class="btn-anime btn-reset" onclick="App.resetWritingDraft('${topic.id}', 'inp-writing-essay', 'writing-essay-feedback')">
+            🔄 Reset Bài Luận
           </button>
         </div>
 
@@ -837,7 +930,7 @@ const App = {
 
     box.innerHTML = `
       <div class="writing-feedback-box">
-        <div style="font-size:1.05rem; font-weight:900; margin-bottom:8px;">
+        <div style="font-size:1.02rem; font-weight:900; margin-bottom:8px;">
           🎯 Đánh giá Essay TOEIC Writing: <span style="color:var(--sakura-pink);">${score} / 5 Điểm</span> (${words} từ • ${paragraphs} đoạn)
         </div>
         <ul style="padding-left:20px; font-size:0.86rem; line-height:1.65; font-weight:700;">
@@ -871,6 +964,10 @@ const App = {
       gapEl.style.color = 'var(--correct-green)';
     } else if (bestScore > 0) {
       gapEl.textContent = `Còn cách mục tiêu 650+: ${650 - bestScore} điểm nữa!`;
+      gapEl.style.color = 'var(--sakura-pink)';
+    } else {
+      gapEl.textContent = 'Mục tiêu: 650+ điểm (Cần ~132/200 câu)';
+      gapEl.style.color = 'var(--sakura-pink)';
     }
 
     document.getElementById('stat-tests-done').textContent = `${testsCompleted} / 30 Đề`;
@@ -1320,12 +1417,12 @@ const App = {
 
     banner.style.display = 'block';
     const goalBadge = testState.scoreTotal >= 650
-      ? '<span style="background:#10b981; color:#fff; padding:2px 8px; border-radius:99px;">ĐẠT 650+ 🎉</span>'
-      : `<span style="background:#f43f5e; color:#fff; padding:2px 8px; border-radius:99px;">Cần +${650 - testState.scoreTotal}đ để đạt 650</span>`;
+      ? '<span style="background:var(--correct-green); color:#fff; padding:2px 8px; border-radius:99px;">ĐẠT 650+ 🎉</span>'
+      : `<span style="background:var(--wrong-red); color:#fff; padding:2px 8px; border-radius:99px;">Cần +${650 - testState.scoreTotal}đ để đạt 650</span>`;
 
     banner.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-        <span style="font-size:1.02rem;">🏆 Điểm TOEIC: <strong>${testState.scoreTotal} / 990</strong></span>
+        <span style="font-size:1.0rem;">🏆 Điểm TOEIC: <strong>${testState.scoreTotal} / 990</strong></span>
         ${goalBadge}
       </div>
       <div style="margin-top:4px; font-size:0.8rem;">
@@ -1346,10 +1443,42 @@ const App = {
       lcScore: 0,
       rcScore: 0
     };
+    this.resetExamTimer(false);
     this.saveState();
     this.renderOmrSheet();
     this.updateScoreBanner();
-    this.mascotSay('🔄 Đã làm mới phiếu trả lời! Senpai sẵn sàng thử sức lại từ đầu chưa nào? 🌸');
+    this.mascotSay('🔄 Đã Reset toàn bộ 200 câu và đồng hồ của đề này! Senpai sẵn sàng làm lại chưa nào? 🌸');
+  },
+
+  resetCurrentPart() {
+    AnimeSound.click();
+    if (this.omrPartFilter === 'all') {
+      this.resetCurrentTest();
+      return;
+    }
+    const range = PART_RANGES[this.omrPartFilter];
+    if (!range) return;
+
+    const testKey = `${this.currentEdition}_${this.currentTest}`;
+    const testState = this.state.savedTests[testKey];
+    for (let q = range[0]; q <= range[1]; q++) {
+      if (testState.answers) delete testState.answers[q];
+      if (testState.revealed) delete testState.revealed[q];
+    }
+    testState.graded = false;
+    this.saveState();
+    this.renderOmrSheet();
+    this.updateScoreBanner();
+    this.mascotSay(`🧹 Đã Reset các câu thuộc Part ${this.omrPartFilter} (${range[0]}–${range[1]})! 🌸`);
+  },
+
+  resetExamTimer(playSfx = true) {
+    if (playSfx) AnimeSound.click();
+    this.timerRunning = false;
+    this.timerSeconds = 7200;
+    this.renderTimerDisplay();
+    const stateEl = document.getElementById('exam-timer-state');
+    if (stateEl) stateEl.textContent = '(Sẵn sàng)';
   },
 
   toggleExamTimer(forceStart) {
@@ -1506,6 +1635,27 @@ const App = {
     this.selectDrillClip(nextIdx, true);
   },
 
+  resetDrillProgress() {
+    AnimeSound.click();
+    this.drillAnswers = {};
+    const notesEl = document.getElementById('drill-notes');
+    if (notesEl) notesEl.value = '';
+    this.renderDrillQuestions();
+    this.mascotSay('🔄 Đã xóa toàn bộ đáp án và ghi chú trong Phòng Luyện Nghe! 🌸');
+  },
+
+  resetCurrentDrillClip() {
+    AnimeSound.click();
+    const grp = this.drillGroups[this.currentDrillGroupIdx];
+    if (!grp) return;
+    const clip = grp.clips[this.currentDrillClipIdx];
+    if (!clip) return;
+    (clip.questions || [clip.qStart || 1]).forEach(qNum => {
+      delete this.drillAnswers[`${grp.id}_${this.currentDrillClipIdx}_${qNum}`];
+    });
+    this.renderDrillQuestions();
+  },
+
   renderDrillQuestions() {
     const grp = this.drillGroups[this.currentDrillGroupIdx];
     if (!grp) return;
@@ -1599,7 +1749,7 @@ const App = {
   },
 
   // ==========================================================================
-  // FALLING SAKURA PETALS CANVAS ANIMATION
+  // FALLING SAKURA PETALS CANVAS ANIMATION (GENTLE & SOFT)
   // ==========================================================================
   initSakuraCanvas() {
     const canvas = document.getElementById('sakura-canvas');
@@ -1613,22 +1763,26 @@ const App = {
     resize();
     window.addEventListener('resize', resize);
 
-    const petals = Array.from({ length: 28 }, () => ({
+    const petals = Array.from({ length: 18 }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: 6 + Math.random() * 8,
-      speedY: 0.6 + Math.random() * 1.1,
-      speedX: -0.4 + Math.random() * 0.8,
+      size: 5 + Math.random() * 6,
+      speedY: 0.4 + Math.random() * 0.7,
+      speedX: -0.3 + Math.random() * 0.6,
       angle: Math.random() * Math.PI * 2,
-      spin: (Math.random() - 0.5) * 0.03,
-      opacity: 0.35 + Math.random() * 0.45
+      spin: (Math.random() - 0.5) * 0.02,
+      opacity: 0.22 + Math.random() * 0.25
     }));
 
     const draw = () => {
+      if (!this.petalsEnabled) {
+        requestAnimationFrame(draw);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       petals.forEach(p => {
         p.y += p.speedY;
-        p.x += p.speedX + Math.sin(p.angle) * 0.35;
+        p.x += p.speedX + Math.sin(p.angle) * 0.25;
         p.angle += p.spin;
 
         if (p.y > canvas.height + 20) {
@@ -1642,7 +1796,7 @@ const App = {
         ctx.translate(p.x, p.y);
         ctx.rotate(p.angle);
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 133, 179, ${p.opacity})`;
+        ctx.fillStyle = `rgba(200, 109, 125, ${p.opacity})`;
         ctx.moveTo(0, 0);
         ctx.bezierCurveTo(p.size / 2, -p.size / 2, p.size, p.size / 3, 0, p.size);
         ctx.bezierCurveTo(-p.size, p.size / 3, -p.size / 2, -p.size / 2, 0, 0);

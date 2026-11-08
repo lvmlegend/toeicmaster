@@ -1,47 +1,72 @@
 /* ==========================================================================
-   🌸 SAKURA TOEIC 650+ ACADEMY - ANIME AESTHETIC STYLESHEET
+   🌸 SAKURA TOEIC 650+ ACADEMY - EYE-FRIENDLY COZY ANIME STYLESHEET
+   Bảng màu Giấy Kem Ấm (Warm Cream Paper) & Matcha Sakura dịu mắt, chống mỏi mắt
    ========================================================================== */
 
 :root {
-  --bg-main: #fff6fa;
-  --bg-secondary: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.92);
-  --bg-glass: rgba(255, 245, 250, 0.86);
-  --text-main: #2d2346;
-  --text-muted: #6e6289;
-  --sakura-pink: #ff5d9e;
-  --sakura-light: #ffcee4;
-  --sakura-deep: #d83177;
-  --sky-cyan: #2ec4b6;
-  --sky-light: #cbf3f0;
-  --star-gold: #ffb703;
-  --lavender: #8338ec;
-  --lavender-light: #ece0ff;
-  --correct-green: #10b981;
-  --correct-bg: #d1fae5;
-  --wrong-red: #f43f5e;
-  --wrong-bg: #ffe4e6;
-  --border-anime: #3b2d54;
-  --shadow-anime: 4px 4px 0px #3b2d54;
-  --shadow-anime-sm: 2px 2px 0px #3b2d54;
-  --shadow-soft: 0 10px 30px rgba(255, 93, 158, 0.15);
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
+  /* Nền giấy kem ấm dịu mắt - Không dùng trắng tinh #fff gây chói */
+  --bg-main: #f3efe6;
+  --bg-secondary: #faf7f0;
+  --bg-card: #f7f4ec;
+  --bg-glass: rgba(247, 244, 236, 0.94);
+
+  /* Chữ xám than ấm áp, độ tương phản dịu nhẹ cho mắt khi đọc bài dài */
+  --text-main: #2c3531;
+  --text-muted: #626d68;
+
+  /* Màu nhấn Pastel trầm dịu (Muted Anime Tones) */
+  --sakura-pink: #c86d7d;
+  --sakura-light: #f0dfe2;
+  --sakura-deep: #8f4250;
+
+  --sky-cyan: #488a83;
+  --sky-light: #dfecea;
+
+  --star-gold: #d4953b;
+  --lavender: #5e6794;
+  --lavender-light: #e4e6f0;
+
+  /* Màu Đúng / Sai dịu mắt */
+  --correct-green: #2d825c;
+  --correct-bg: #dff0e8;
+  --wrong-red: #c25151;
+  --wrong-bg: #f6e2e2;
+
+  /* Viền & Đổ bóng mềm mại, thanh lịch */
+  --border-anime: #d2cab8;
+  --border-strong: #948b79;
+  --shadow-anime: 0 4px 14px rgba(44, 53, 49, 0.06);
+  --shadow-anime-sm: 0 2px 6px rgba(44, 53, 49, 0.05);
+  --shadow-soft: 0 8px 24px rgba(44, 53, 49, 0.08);
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
 }
 
 body.night-mode {
-  --bg-main: #181326;
-  --bg-secondary: #231c35;
-  --bg-card: rgba(36, 29, 55, 0.94);
-  --bg-glass: rgba(28, 22, 44, 0.88);
-  --text-main: #f9f0ff;
-  --text-muted: #b8a9d1;
-  --sakura-light: #4a203b;
-  --lavender-light: #34225c;
-  --border-anime: #ff7eb3;
-  --shadow-anime: 4px 4px 0px rgba(255, 126, 179, 0.45);
-  --shadow-anime-sm: 2px 2px 0px rgba(255, 126, 179, 0.45);
+  /* Chế độ tối Slate ấm bảo vệ mắt ban đêm */
+  --bg-main: #1b2028;
+  --bg-secondary: #242a34;
+  --bg-card: #262d38;
+  --bg-glass: rgba(30, 36, 45, 0.94);
+  --text-main: #e2e6ed;
+  --text-muted: #9aa4b4;
+  --sakura-pink: #d47a8a;
+  --sakura-light: #3b2a33;
+  --sakura-deep: #f0b6c1;
+  --sky-cyan: #529e96;
+  --sky-light: #223837;
+  --lavender: #7984b8;
+  --lavender-light: #2b3045;
+  --correct-green: #3ca374;
+  --correct-bg: rgba(45, 130, 92, 0.22);
+  --wrong-red: #d96868;
+  --wrong-bg: rgba(194, 81, 81, 0.22);
+  --border-anime: #384152;
+  --border-strong: #4f5b70;
+  --shadow-anime: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-anime-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -51,19 +76,16 @@ body.night-mode {
 }
 
 body {
-  font-family: 'Nunito', 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background-color: var(--bg-main);
-  background-image:
-    radial-gradient(circle at 12% 18%, rgba(255, 154, 198, 0.22) 0%, transparent 32%),
-    radial-gradient(circle at 88% 12%, rgba(131, 56, 236, 0.14) 0%, transparent 30%),
-    radial-gradient(circle at 80% 85%, rgba(46, 196, 182, 0.16) 0%, transparent 35%);
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.55;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Sakura Falling Petals Canvas */
+/* Sakura Falling Petals Canvas (Subtle & Soft) */
 #sakura-canvas {
   position: fixed;
   top: 0;
@@ -72,6 +94,7 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 1;
+  opacity: 0.45;
 }
 
 .app-wrapper {
@@ -83,7 +106,7 @@ body {
 }
 
 /* ==========================================================================
-   TOP NAVIGATION BAR (ANIME ACADEMY HEADER)
+   TOP NAVIGATION BAR
    ========================================================================== */
 .top-navbar {
   position: sticky;
@@ -92,51 +115,46 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
   padding: 10px 22px;
   background: var(--bg-glass);
-  backdrop-filter: blur(14px);
-  border-bottom: 3px solid var(--border-anime);
-  box-shadow: 0 4px 20px rgba(59, 45, 84, 0.08);
+  backdrop-filter: blur(12px);
+  border-bottom: 1.5px solid var(--border-anime);
+  box-shadow: var(--shadow-anime-sm);
   flex-wrap: wrap;
 }
 
 .brand-box {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 11px;
   cursor: pointer;
 }
 
 .brand-avatar {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 2.5px solid var(--border-anime);
-  box-shadow: var(--shadow-anime-sm);
+  border: 2px solid var(--sakura-pink);
   object-fit: cover;
-  background: #fff;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: var(--bg-secondary);
+  transition: transform 0.2s ease;
 }
 
 .brand-box:hover .brand-avatar {
-  transform: scale(1.1) rotate(-6deg);
+  transform: scale(1.06);
 }
 
 .brand-title {
   font-family: 'Fredoka', 'Nunito', sans-serif;
-  font-size: 1.28rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--sakura-pink);
-  text-shadow: 1px 1px 0px var(--border-anime);
-  letter-spacing: 0.3px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  letter-spacing: 0.2px;
 }
 
 .brand-sub {
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-muted);
 }
@@ -144,42 +162,41 @@ body {
 /* Main Mode Tabs */
 .nav-tabs {
   display: flex;
-  gap: 8px;
+  gap: 7px;
   flex-wrap: wrap;
 }
 
 .nav-tab {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 8px 15px;
-  border-radius: 999px;
-  border: 2px solid var(--border-anime);
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-anime);
   background: var(--bg-secondary);
   color: var(--text-main);
   font-weight: 800;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   cursor: pointer;
-  box-shadow: var(--shadow-anime-sm);
-  transition: all 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.16s ease;
 }
 
 .nav-tab:hover {
-  transform: translateY(-2px);
   background: var(--sakura-light);
+  border-color: var(--sakura-pink);
 }
 
 .nav-tab.active {
-  background: linear-gradient(135deg, var(--sakura-pink), #ff85b3);
+  background: var(--sakura-pink);
+  border-color: var(--sakura-pink);
   color: #fff;
-  transform: translateY(-2px);
 }
 
 /* Right Status & Audio Controls */
 .nav-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -188,11 +205,10 @@ body {
   align-items: center;
   gap: 8px;
   background: var(--lavender-light);
-  border: 2px solid var(--border-anime);
+  border: 1.5px solid var(--border-anime);
   border-radius: 999px;
   padding: 5px 12px;
-  box-shadow: var(--shadow-anime-sm);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 800;
 }
 
@@ -201,21 +217,20 @@ body {
   color: #fff;
   padding: 2px 8px;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.74rem;
 }
 
 .exp-bar-wrap {
-  width: 68px;
-  height: 8px;
-  background: rgba(0, 0, 0, 0.12);
+  width: 60px;
+  height: 7px;
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 99px;
   overflow: hidden;
-  border: 1px solid var(--border-anime);
 }
 
 .exp-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--star-gold), var(--sakura-pink));
+  background: var(--sakura-pink);
   width: 30%;
   transition: width 0.35s ease;
 }
@@ -225,24 +240,35 @@ body {
   align-items: center;
   gap: 5px;
   padding: 7px 12px;
-  border-radius: 999px;
-  border: 2px solid var(--border-anime);
+  border-radius: 9px;
+  border: 1.5px solid var(--border-anime);
   background: var(--bg-secondary);
   color: var(--text-main);
   font-weight: 800;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   cursor: pointer;
-  box-shadow: var(--shadow-anime-sm);
   transition: all 0.15s ease;
 }
 
 .icon-btn:hover {
-  transform: translateY(-2px);
+  background: var(--sakura-light);
+  border-color: var(--sakura-pink);
 }
 
 .icon-btn.active-toggle {
   background: var(--sky-cyan);
+  border-color: var(--sky-cyan);
   color: #fff;
+}
+
+.icon-btn.btn-reset-top {
+  color: var(--wrong-red);
+  border-color: rgba(194, 81, 81, 0.35);
+}
+
+.icon-btn.btn-reset-top:hover {
+  background: var(--wrong-bg);
+  border-color: var(--wrong-red);
 }
 
 /* ==========================================================================
@@ -251,10 +277,10 @@ body {
 .view-section {
   display: none;
   padding: 20px 24px 90px;
-  max-width: 1600px;
+  max-width: 1580px;
   width: 100%;
   margin: 0 auto;
-  animation: fadeSlideUp 0.28s ease;
+  animation: fadeSlideUp 0.22s ease;
 }
 
 .view-section.active {
@@ -262,34 +288,34 @@ body {
 }
 
 @keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================================================================
-   HERO BANNER (DASHBOARD)
+   HERO BANNER (DASHBOARD - SOFT & EASY ON THE EYES)
    ========================================================================== */
 .hero-card {
   position: relative;
   border-radius: var(--radius-lg);
-  border: 3px solid var(--border-anime);
+  border: 1.5px solid var(--border-anime);
   box-shadow: var(--shadow-anime);
   overflow: hidden;
-  min-height: 255px;
+  min-height: 230px;
   display: grid;
-  grid-template-columns: 1.35fr 0.65fr;
-  background: linear-gradient(125deg, rgba(45, 35, 70, 0.84) 0%, rgba(131, 56, 236, 0.65) 100%),
+  grid-template-columns: 1.4fr 0.6fr;
+  background: linear-gradient(125deg, rgba(38, 46, 54, 0.88) 0%, rgba(74, 85, 110, 0.82) 100%),
               url('./assets/hero_banner.jpg') center/cover no-repeat;
-  color: #fff;
-  margin-bottom: 24px;
+  color: #f7f4ec;
+  margin-bottom: 22px;
 }
 
 .hero-content {
-  padding: 28px 32px;
+  padding: 26px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
+  gap: 11px;
 }
 
 .hero-kicker {
@@ -297,33 +323,32 @@ body {
   align-items: center;
   gap: 6px;
   align-self: flex-start;
-  background: var(--star-gold);
-  color: #2d2346;
-  font-weight: 900;
-  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffe8ef;
+  font-weight: 800;
+  font-size: 0.78rem;
   padding: 4px 12px;
   border-radius: 999px;
-  border: 2px solid #2d2346;
-  box-shadow: 2px 2px 0 #2d2346;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .hero-title {
   font-family: 'Fredoka', 'Nunito', sans-serif;
-  font-size: 2rem;
-  line-height: 1.2;
-  text-shadow: 2px 2px 0px #2d2346;
+  font-size: 1.85rem;
+  line-height: 1.25;
+  color: #ffffff;
 }
 
 .hero-desc {
-  font-size: 0.98rem;
-  opacity: 0.95;
-  max-width: 640px;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  color: #e4e8f0;
+  max-width: 650px;
+  line-height: 1.55;
 }
 
 .hero-actions {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   margin-top: 6px;
 }
@@ -331,39 +356,50 @@ body {
 .btn-anime {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 999px;
-  border: 2.5px solid var(--border-anime);
-  font-weight: 900;
-  font-size: 0.92rem;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  font-weight: 800;
+  font-size: 0.88rem;
   cursor: pointer;
-  box-shadow: var(--shadow-anime);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-anime-sm);
+  transition: all 0.15s ease;
 }
 
 .btn-anime:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--border-anime);
+  transform: translateY(-1px);
+  filter: brightness(1.04);
 }
 
 .btn-anime:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px var(--border-anime);
+  transform: translateY(1px);
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--sakura-pink), #ff7eb3);
+  background: var(--sakura-pink);
   color: #fff;
 }
 
 .btn-secondary {
-  background: var(--star-gold);
-  color: #2d2346;
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  border-color: var(--border-anime);
 }
 
 .btn-cyan {
   background: var(--sky-cyan);
+  color: #fff;
+}
+
+.btn-reset {
+  background: var(--wrong-bg);
+  color: var(--wrong-red);
+  border: 1.5px solid rgba(194, 81, 81, 0.35);
+}
+
+.btn-reset:hover {
+  background: var(--wrong-red);
   color: #fff;
 }
 
@@ -372,22 +408,21 @@ body {
   align-items: center;
   justify-content: center;
   padding: 16px;
-  position: relative;
 }
 
 .hero-mascot-img {
-  width: 210px;
-  height: 210px;
+  width: 190px;
+  height: 190px;
   object-fit: cover;
-  border-radius: 22px;
-  border: 3px solid #fff;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-  transform: rotate(2deg);
-  transition: transform 0.3s ease;
+  border-radius: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.25s ease;
 }
 
 .hero-mascot-img:hover {
-  transform: rotate(-2deg) scale(1.04);
+  transform: scale(1.03);
 }
 
 /* ==========================================================================
@@ -395,16 +430,16 @@ body {
    ========================================================================== */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
 }
 
 .stat-card {
   background: var(--bg-card);
-  border: 2.5px solid var(--border-anime);
+  border: 1.5px solid var(--border-anime);
   border-radius: var(--radius-md);
-  padding: 16px 18px;
+  padding: 15px 18px;
   box-shadow: var(--shadow-anime);
   display: flex;
   align-items: center;
@@ -412,32 +447,32 @@ body {
 }
 
 .stat-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 14px;
-  border: 2px solid var(--border-anime);
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--border-anime);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.55rem;
+  font-size: 1.4rem;
   flex-shrink: 0;
 }
 
 .stat-info h4 {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
 .stat-info .stat-val {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 900;
   color: var(--text-main);
 }
 
 .stat-info .stat-sub {
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--sakura-pink);
 }
@@ -454,7 +489,7 @@ body {
 
 .section-title {
   font-family: 'Fredoka', 'Nunito', sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.28rem;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -462,42 +497,42 @@ body {
 
 .editions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 20px;
-  margin-bottom: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 18px;
+  margin-bottom: 26px;
 }
 
 .edition-card {
   background: var(--bg-card);
-  border: 3px solid var(--border-anime);
+  border: 1.5px solid var(--border-anime);
   border-radius: var(--radius-lg);
   padding: 20px;
   box-shadow: var(--shadow-anime);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 11px;
 }
 
 .edition-badge {
   align-self: flex-start;
   background: var(--sakura-light);
   color: var(--sakura-deep);
-  border: 1.5px solid var(--border-anime);
-  font-size: 0.75rem;
-  font-weight: 900;
+  border: 1px solid rgba(200, 109, 125, 0.3);
+  font-size: 0.74rem;
+  font-weight: 800;
   padding: 3px 10px;
   border-radius: 999px;
 }
 
 .edition-card h3 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 900;
 }
 
 .edition-card p {
   font-size: 0.86rem;
   color: var(--text-muted);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .test-pills-grid {
@@ -509,14 +544,13 @@ body {
 
 .test-pill-btn {
   padding: 8px 4px;
-  border-radius: 10px;
-  border: 2px solid var(--border-anime);
+  border-radius: 9px;
+  border: 1.5px solid var(--border-anime);
   background: var(--bg-secondary);
   color: var(--text-main);
   font-weight: 800;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   cursor: pointer;
-  box-shadow: var(--shadow-anime-sm);
   transition: all 0.14s ease;
   display: flex;
   flex-direction: column;
@@ -526,8 +560,8 @@ body {
 
 .test-pill-btn:hover {
   background: var(--sakura-pink);
+  border-color: var(--sakura-pink);
   color: #fff;
-  transform: translateY(-2px);
 }
 
 .test-pill-btn.completed {
@@ -537,7 +571,7 @@ body {
 
 .test-pill-score {
   font-size: 0.68rem;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--lavender);
 }
 
@@ -550,11 +584,11 @@ body {
    ========================================================================== */
 .exam-toolbar {
   background: var(--bg-card);
-  border: 2.5px solid var(--border-anime);
+  border: 1.5px solid var(--border-anime);
   border-radius: var(--radius-md);
-  padding: 12px 16px;
+  padding: 11px 16px;
   box-shadow: var(--shadow-anime);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -571,15 +605,14 @@ body {
 
 .anime-select {
   padding: 7px 12px;
-  border-radius: 10px;
-  border: 2px solid var(--border-anime);
+  border-radius: 9px;
+  border: 1.5px solid var(--border-anime);
   background: var(--bg-secondary);
   color: var(--text-main);
   font-weight: 800;
   font-family: inherit;
-  font-size: 0.86rem;
+  font-size: 0.85rem;
   cursor: pointer;
-  box-shadow: var(--shadow-anime-sm);
 }
 
 .doc-switch-group {
@@ -590,30 +623,34 @@ body {
 
 .doc-btn {
   padding: 7px 12px;
-  border-radius: 10px;
-  border: 2px solid var(--border-anime);
+  border-radius: 9px;
+  border: 1.5px solid var(--border-anime);
   background: var(--bg-secondary);
   color: var(--text-main);
   font-weight: 800;
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
-.doc-btn.active {
-  background: var(--lavender);
-  color: #fff;
-  box-shadow: var(--shadow-anime-sm);
+.doc-btn:hover {
+  background: var(--lavender-light);
 }
 
-/* Audio Deck Bar */
+.doc-btn.active {
+  background: var(--lavender);
+  border-color: var(--lavender);
+  color: #fff;
+}
+
+/* Audio Deck Bar (Muted Warm Gradient) */
 .audio-deck {
-  background: linear-gradient(90deg, var(--sakura-light), var(--lavender-light));
-  border: 2.5px solid var(--border-anime);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-anime);
   border-radius: var(--radius-md);
-  padding: 10px 16px;
-  box-shadow: var(--shadow-anime);
-  margin-bottom: 14px;
+  padding: 9px 16px;
+  box-shadow: var(--shadow-anime-sm);
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -631,16 +668,17 @@ body {
 .track-chip {
   padding: 5px 11px;
   border-radius: 999px;
-  border: 2px solid var(--border-anime);
+  border: 1.5px solid var(--border-anime);
   background: var(--bg-secondary);
   color: var(--text-main);
   font-weight: 800;
-  font-size: 0.78rem;
+  font-size: 0.77rem;
   cursor: pointer;
 }
 
 .track-chip.active {
   background: var(--sakura-pink);
+  border-color: var(--sakura-pink);
   color: #fff;
 }
 
@@ -649,13 +687,12 @@ body {
   min-width: 260px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .audio-player-main audio {
   width: 100%;
-  height: 38px;
-  border-radius: 999px;
+  height: 36px;
 }
 
 .audio-speed-group {
@@ -666,27 +703,37 @@ body {
 
 .mini-btn {
   padding: 5px 10px;
-  border-radius: 8px;
-  border: 2px solid var(--border-anime);
+  border-radius: 7px;
+  border: 1.5px solid var(--border-anime);
   background: var(--bg-secondary);
   color: var(--text-main);
   font-weight: 800;
   font-size: 0.76rem;
   cursor: pointer;
-  box-shadow: 1px 1px 0 var(--border-anime);
+  transition: all 0.14s ease;
 }
 
 .mini-btn:hover {
-  background: var(--star-gold);
-  color: #2d2346;
+  background: var(--sakura-light);
+  border-color: var(--sakura-pink);
+}
+
+.mini-btn.mini-reset {
+  color: var(--wrong-red);
+  border-color: rgba(194, 81, 81, 0.35);
+}
+
+.mini-btn.mini-reset:hover {
+  background: var(--wrong-bg);
+  border-color: var(--wrong-red);
 }
 
 /* Split Screen Layout */
 .exam-split-layout {
   display: grid;
   grid-template-columns: 1.25fr 0.75fr;
-  gap: 16px;
-  height: calc(100vh - 235px);
+  gap: 14px;
+  height: calc(100vh - 230px);
   min-height: 580px;
 }
 
@@ -695,8 +742,8 @@ body {
 }
 
 .pdf-viewer-pane {
-  background: #2b2638;
-  border: 3px solid var(--border-anime);
+  background: #2b3038;
+  border: 1.5px solid var(--border-anime);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-anime);
   overflow: hidden;
@@ -708,11 +755,11 @@ body {
 .pdf-pane-header {
   background: var(--bg-secondary);
   padding: 8px 14px;
-  border-bottom: 2px solid var(--border-anime);
+  border-bottom: 1.5px solid var(--border-anime);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.84rem;
+  font-size: 0.83rem;
   font-weight: 800;
 }
 
@@ -721,7 +768,7 @@ body {
   height: 100%;
   border: none;
   flex: 1;
-  background: #383346;
+  background: #323842;
 }
 
 .key-image-viewer {
@@ -732,21 +779,20 @@ body {
   align-items: flex-start;
   justify-content: center;
   padding: 16px;
-  background: #231e2f;
+  background: #272c35;
 }
 
 .key-image-viewer img {
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
-  border: 3px solid #fff;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  border-radius: 10px;
+  border: 2px solid var(--border-anime);
 }
 
 /* OMR Answer Sheet Pane */
 .omr-pane {
   background: var(--bg-card);
-  border: 3px solid var(--border-anime);
+  border: 1.5px solid var(--border-anime);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-anime);
   display: flex;
@@ -755,9 +801,9 @@ body {
 }
 
 .omr-header {
-  padding: 12px 14px;
+  padding: 11px 14px;
   background: var(--bg-secondary);
-  border-bottom: 2px solid var(--border-anime);
+  border-bottom: 1.5px solid var(--border-anime);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -771,16 +817,23 @@ body {
   flex-wrap: wrap;
 }
 
+.timer-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .timer-box {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #2d2346;
-  color: var(--star-gold);
-  padding: 5px 12px;
+  background: var(--lavender-light);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-anime);
+  padding: 4px 11px;
   border-radius: 999px;
   font-family: 'Fredoka', monospace;
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   font-weight: 700;
   cursor: pointer;
 }
@@ -795,7 +848,7 @@ body {
 .part-chip {
   padding: 4px 9px;
   border-radius: 999px;
-  border: 1.5px solid var(--border-anime);
+  border: 1px solid var(--border-anime);
   background: var(--bg-main);
   color: var(--text-main);
   font-size: 0.74rem;
@@ -806,17 +859,18 @@ body {
 
 .part-chip.active {
   background: var(--sakura-pink);
+  border-color: var(--sakura-pink);
   color: #fff;
 }
 
 .omr-score-banner {
   display: none;
-  padding: 12px 14px;
-  background: linear-gradient(135deg, #fff3b0, #ffcee4);
-  color: #2d2346;
-  border-bottom: 2px solid var(--border-anime);
+  padding: 11px 14px;
+  background: var(--sakura-light);
+  color: var(--text-main);
+  border-bottom: 1.5px solid var(--border-anime);
   font-weight: 800;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
 }
 
 .omr-list {
@@ -833,10 +887,10 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 6px 10px;
-  border-radius: 10px;
-  border: 1.5px solid rgba(59, 45, 84, 0.2);
+  border-radius: 9px;
+  border: 1px solid var(--border-anime);
   background: var(--bg-secondary);
-  transition: transform 0.1s ease, background 0.15s ease;
+  transition: background 0.15s ease;
 }
 
 .omr-row:hover {
@@ -854,15 +908,10 @@ body {
 }
 
 .q-num {
-  font-weight: 900;
-  font-size: 0.86rem;
+  font-weight: 800;
+  font-size: 0.85rem;
   min-width: 44px;
   color: var(--text-main);
-}
-
-.omr-row.row-correct .q-num,
-.omr-row.row-wrong .q-num {
-  color: #1f2937;
 }
 
 .q-bubbles {
@@ -871,85 +920,84 @@ body {
 }
 
 .bubble-btn {
-  width: 32px;
-  height: 32px;
+  width: 31px;
+  height: 31px;
   border-radius: 50%;
-  border: 2px solid var(--border-anime);
+  border: 1.5px solid var(--border-strong);
   background: var(--bg-main);
   color: var(--text-main);
-  font-weight: 900;
-  font-size: 0.8rem;
+  font-weight: 800;
+  font-size: 0.79rem;
   cursor: pointer;
-  transition: all 0.14s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.14s ease;
 }
 
 .bubble-btn:hover {
-  transform: scale(1.12);
   border-color: var(--sakura-pink);
+  background: var(--sakura-light);
 }
 
 .bubble-btn.selected {
   background: var(--sakura-pink);
+  border-color: var(--sakura-pink);
   color: #fff;
-  transform: scale(1.1);
-  box-shadow: 2px 2px 0 var(--border-anime);
 }
 
 .bubble-btn.correct-ans {
   background: var(--correct-green) !important;
   color: #fff !important;
-  border-color: #065f46 !important;
+  border-color: var(--correct-green) !important;
 }
 
 .bubble-btn.wrong-ans {
   background: var(--wrong-red) !important;
   color: #fff !important;
-  border-color: #881337 !important;
+  border-color: var(--wrong-red) !important;
 }
 
 .peek-btn {
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   padding: 2px 5px;
-  opacity: 0.65;
-  transition: opacity 0.15s, transform 0.15s;
+  opacity: 0.6;
+  transition: opacity 0.15s;
 }
 
 .peek-btn:hover {
   opacity: 1;
-  transform: scale(1.2);
 }
 
 .omr-footer {
   padding: 10px 14px;
   background: var(--bg-secondary);
-  border-top: 2px solid var(--border-anime);
+  border-top: 1.5px solid var(--border-anime);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 /* ==========================================================================
-   LISTENING DRILL STUDIO (LUYỆN NGHE TỪNG CÂU & CẮT PART)
+   LISTENING DRILL STUDIO
    ========================================================================== */
 .drill-layout {
   display: grid;
-  grid-template-columns: 350px 1fr;
-  gap: 20px;
+  grid-template-columns: 340px 1fr;
+  gap: 18px;
 }
 
 .drill-sidebar {
   background: var(--bg-card);
-  border: 3px solid var(--border-anime);
+  border: 1.5px solid var(--border-anime);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-anime);
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 11px;
   max-height: 75vh;
 }
 
@@ -958,18 +1006,18 @@ body {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
   padding-right: 4px;
 }
 
 .clip-item {
   padding: 9px 12px;
-  border-radius: 11px;
-  border: 2px solid var(--border-anime);
+  border-radius: 9px;
+  border: 1.5px solid var(--border-anime);
   background: var(--bg-secondary);
   cursor: pointer;
   font-weight: 800;
-  font-size: 0.84rem;
+  font-size: 0.83rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -978,23 +1026,23 @@ body {
 
 .clip-item:hover {
   background: var(--sakura-light);
-  transform: translateX(3px);
 }
 
 .clip-item.active {
   background: var(--sakura-pink);
+  border-color: var(--sakura-pink);
   color: #fff;
 }
 
 .drill-stage {
   background: var(--bg-card);
-  border: 3px solid var(--border-anime);
+  border: 1.5px solid var(--border-anime);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-anime);
-  padding: 24px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .visualizer-bars {
@@ -1002,19 +1050,20 @@ body {
   align-items: flex-end;
   justify-content: center;
   gap: 5px;
-  height: 54px;
-  padding: 10px;
-  background: linear-gradient(90deg, rgba(255,93,158,0.12), rgba(46,196,182,0.12));
-  border-radius: 14px;
-  border: 2px dashed var(--sakura-pink);
+  height: 48px;
+  padding: 8px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1.5px dashed var(--border-anime);
 }
 
 .v-bar {
-  width: 8px;
-  height: 12px;
+  width: 7px;
+  height: 10px;
   background: var(--sakura-pink);
   border-radius: 99px;
   transition: height 0.15s ease;
+  opacity: 0.75;
 }
 
 .visualizer-bars.playing .v-bar {
@@ -1027,7 +1076,7 @@ body {
 
 @keyframes bounceWave {
   0% { height: 8px; }
-  100% { height: 42px; }
+  100% { height: 36px; }
 }
 
 /* ==========================================================================
@@ -1035,8 +1084,8 @@ body {
    ========================================================================== */
 .mascot-widget {
   position: fixed;
-  bottom: 18px;
-  right: 20px;
+  bottom: 16px;
+  right: 18px;
   z-index: 90;
   display: flex;
   align-items: flex-end;
@@ -1046,21 +1095,22 @@ body {
 
 .mascot-bubble {
   pointer-events: auto;
-  max-width: 285px;
+  max-width: 275px;
   background: var(--bg-secondary);
   color: var(--text-main);
-  border: 2.5px solid var(--border-anime);
-  border-radius: 18px 18px 4px 18px;
-  padding: 12px 15px;
-  box-shadow: var(--shadow-anime);
-  font-size: 0.85rem;
-  font-weight: 800;
-  line-height: 1.4;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 14px 14px 4px 14px;
+  padding: 11px 14px;
+  box-shadow: var(--shadow-soft);
+  font-size: 0.83rem;
+  font-weight: 700;
+  line-height: 1.45;
+  transition: all 0.2s ease;
 }
 
 .mascot-bubble-name {
   font-size: 0.72rem;
+  font-weight: 900;
   color: var(--sakura-pink);
   text-transform: uppercase;
   margin-bottom: 3px;
@@ -1071,20 +1121,20 @@ body {
 
 .mascot-avatar-btn {
   pointer-events: auto;
-  width: 74px;
-  height: 74px;
+  width: 66px;
+  height: 66px;
   border-radius: 50%;
-  border: 3px solid var(--border-anime);
-  box-shadow: var(--shadow-anime);
+  border: 2.5px solid var(--sakura-pink);
+  box-shadow: var(--shadow-soft);
   overflow: hidden;
   cursor: pointer;
-  background: #fff;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: var(--bg-secondary);
+  transition: transform 0.2s ease;
   flex-shrink: 0;
 }
 
 .mascot-avatar-btn:hover {
-  transform: scale(1.1) rotate(-5deg);
+  transform: scale(1.06);
 }
 
 .mascot-avatar-btn img {
@@ -1096,18 +1146,18 @@ body {
 /* Sound Mixer Popover */
 .sound-popover {
   position: fixed;
-  top: 72px;
+  top: 68px;
   right: 22px;
   z-index: 100;
-  width: 290px;
+  width: 285px;
   background: var(--bg-secondary);
-  border: 3px solid var(--border-anime);
+  border: 1.5px solid var(--border-strong);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-anime);
-  padding: 16px;
+  box-shadow: var(--shadow-soft);
+  padding: 15px;
   display: none;
   flex-direction: column;
-  gap: 12px;
+  gap: 11px;
 }
 
 .sound-popover.open {
@@ -1118,13 +1168,182 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   font-weight: 800;
 }
 
 .slider-row input[type="range"] {
   accent-color: var(--sakura-pink);
   cursor: pointer;
+}
+
+/* ==========================================================================
+   READING & WRITING STUDIO (EYE-FRIENDLY PAPER CARDS)
+   ========================================================================== */
+.rw-subnav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.rw-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-anime);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-anime);
+  margin-bottom: 16px;
+}
+
+.rw-split-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.passage-box {
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-anime);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  font-size: 0.96rem;
+  line-height: 1.72;
+  white-space: pre-wrap;
+  color: var(--text-main);
+}
+
+.passage-header-meta {
+  background: var(--lavender-light);
+  border: 1px solid var(--border-anime);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+  color: var(--text-main);
+}
+
+.blank-tag {
+  display: inline-block;
+  background: var(--sakura-light);
+  color: var(--sakura-deep);
+  border: 1px solid rgba(200, 109, 125, 0.4);
+  padding: 1px 8px;
+  border-radius: 6px;
+  font-weight: 900;
+  margin: 0 2px;
+}
+
+.rw-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-anime);
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.14s ease;
+  margin-bottom: 8px;
+}
+
+.rw-option-btn:hover {
+  background: var(--sakura-light);
+  border-color: var(--sakura-pink);
+}
+
+.rw-option-btn.correct-choice {
+  background: var(--correct-bg) !important;
+  border-color: var(--correct-green) !important;
+  color: var(--correct-green) !important;
+  font-weight: 800;
+}
+
+.rw-option-btn.wrong-choice {
+  background: var(--wrong-bg) !important;
+  border-color: var(--wrong-red) !important;
+  color: var(--wrong-red) !important;
+}
+
+.explanation-box {
+  margin-top: 10px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border-left: 4px solid var(--sakura-pink);
+  border-top: 1px solid var(--border-anime);
+  border-right: 1px solid var(--border-anime);
+  border-bottom: 1px solid var(--border-anime);
+  font-size: 0.87rem;
+  line-height: 1.6;
+}
+
+.keyword-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: var(--sakura-light);
+  color: var(--sakura-deep);
+  border: 1.5px solid var(--sakura-pink);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.phrase-chip {
+  display: inline-block;
+  padding: 6px 11px;
+  margin: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border-anime);
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  font-size: 0.79rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.phrase-chip:hover {
+  background: var(--sakura-pink);
+  border-color: var(--sakura-pink);
+  color: #fff;
+}
+
+.writing-editor {
+  width: 100%;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-strong);
+  padding: 13px 15px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  background: var(--bg-secondary);
+  color: var(--text-main);
+}
+
+.writing-editor:focus {
+  outline: 2px solid var(--sakura-pink);
+  border-color: transparent;
+}
+
+.writing-feedback-box {
+  margin-top: 14px;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-anime);
+  background: var(--bg-secondary);
 }
 
 @media (max-width: 1024px) {
@@ -1150,167 +1369,4 @@ body {
   .rw-split-grid {
     grid-template-columns: 1fr !important;
   }
-}
-
-/* ==========================================================================
-   READING & WRITING STUDIO (LUYỆN ĐỌC HIỂU PART 5-6-7 & LUYỆN VIẾT TOEIC)
-   ========================================================================== */
-.rw-subnav {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-
-.rw-card {
-  background: var(--bg-card);
-  border: 3px solid var(--border-anime);
-  border-radius: var(--radius-lg);
-  padding: 20px 22px;
-  box-shadow: var(--shadow-anime);
-  margin-bottom: 18px;
-}
-
-.rw-split-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 20px;
-  align-items: start;
-}
-
-.passage-box {
-  background: var(--bg-secondary);
-  border: 2.5px solid var(--border-anime);
-  border-radius: var(--radius-md);
-  padding: 18px 20px;
-  box-shadow: var(--shadow-anime-sm);
-  font-size: 0.95rem;
-  line-height: 1.68;
-  white-space: pre-wrap;
-}
-
-.passage-header-meta {
-  background: var(--lavender-light);
-  border: 2px solid var(--border-anime);
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-family: monospace;
-  font-size: 0.86rem;
-  font-weight: 700;
-  margin-bottom: 14px;
-  white-space: pre-wrap;
-  color: var(--text-main);
-}
-
-.blank-tag {
-  display: inline-block;
-  background: var(--sakura-light);
-  color: var(--sakura-deep);
-  border: 1.5px solid var(--border-anime);
-  padding: 1px 8px;
-  border-radius: 6px;
-  font-weight: 900;
-  margin: 0 2px;
-}
-
-.rw-option-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  text-align: left;
-  padding: 10px 14px;
-  border-radius: 12px;
-  border: 2px solid var(--border-anime);
-  background: var(--bg-secondary);
-  color: var(--text-main);
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.14s ease;
-  margin-bottom: 8px;
-}
-
-.rw-option-btn:hover {
-  background: var(--sakura-light);
-  transform: translateX(3px);
-}
-
-.rw-option-btn.correct-choice {
-  background: var(--correct-bg) !important;
-  border-color: var(--correct-green) !important;
-  color: #065f46 !important;
-}
-
-.rw-option-btn.wrong-choice {
-  background: var(--wrong-bg) !important;
-  border-color: var(--wrong-red) !important;
-  color: #881337 !important;
-}
-
-.explanation-box {
-  margin-top: 10px;
-  padding: 12px 15px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255, 243, 176, 0.45), rgba(255, 206, 228, 0.45));
-  border: 2px dashed var(--sakura-pink);
-  font-size: 0.86rem;
-  line-height: 1.55;
-}
-
-.keyword-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: var(--star-gold);
-  color: #2d2346;
-  border: 2px solid #2d2346;
-  font-weight: 900;
-  font-size: 0.92rem;
-  box-shadow: 2px 2px 0 #2d2346;
-}
-
-.phrase-chip {
-  display: inline-block;
-  padding: 6px 11px;
-  margin: 4px;
-  border-radius: 10px;
-  border: 1.5px solid var(--border-anime);
-  background: var(--bg-secondary);
-  color: var(--text-main);
-  font-size: 0.8rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.14s ease;
-}
-
-.phrase-chip:hover {
-  background: var(--sakura-pink);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.writing-editor {
-  width: 100%;
-  border-radius: 14px;
-  border: 2.5px solid var(--border-anime);
-  padding: 14px 16px;
-  font-family: inherit;
-  font-size: 0.96rem;
-  line-height: 1.6;
-  background: var(--bg-secondary);
-  color: var(--text-main);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.writing-feedback-box {
-  margin-top: 14px;
-  padding: 16px;
-  border-radius: 14px;
-  border: 2.5px solid var(--border-anime);
-  background: var(--bg-secondary);
-  box-shadow: var(--shadow-anime-sm);
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌸 Sakura TOEIC 650+ Academy | Web Ôn Luyện TOEIC Phong Cách Anime</title>
+  <title>🌸 Sakura TOEIC 650+ Academy | Web Ôn Luyện TOEIC Phong Cách Anime Dịu Mắt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -52,15 +52,19 @@
         </div>
 
         <button class="icon-btn" id="btn-bgm-toggle" onclick="App.toggleBgm()">
-          🎵 Nhạc Anime: TẮT
+          🎵 Nhạc: TẮT
         </button>
 
         <button class="icon-btn" onclick="App.toggleSoundPopover()">
           🔊 Âm Thanh
         </button>
 
-        <button class="icon-btn" id="btn-theme-toggle" onclick="App.toggleNightMode()">
-          🌙
+        <button class="icon-btn" id="btn-theme-toggle" onclick="App.toggleNightMode()" title="Đổi giao diện Sáng dịu mắt / Tối ban đêm">
+          🌙 Đêm
+        </button>
+
+        <button class="icon-btn btn-reset-top" onclick="App.resetAllProgress()" title="Đặt lại toàn bộ dữ liệu và lịch sử làm bài về ban đầu">
+          🔄 Reset Tất Cả
         </button>
       </div>
     </header>
@@ -68,7 +72,7 @@
     <!-- ==================== SOUND MIXER POPOVER ==================== -->
     <div class="sound-popover" id="sound-popover">
       <div style="display:flex; justify-content:space-between; align-items:center;">
-        <strong style="font-size:0.95rem;">🎶 Bộ Chỉnh Âm Anime</strong>
+        <strong style="font-size:0.92rem;">🎶 Bộ Chỉnh Âm & Hiệu Ứng</strong>
         <button class="mini-btn" onclick="App.toggleSoundPopover()">Đóng ✕</button>
       </div>
       <div class="slider-row">
@@ -85,9 +89,15 @@
         </label>
         <input type="range" id="rng-bgm" min="0" max="100" value="28" oninput="App.updateAudioSettings()" />
       </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; padding-top:4px; border-top:1px dashed var(--border-anime);">
-        <button class="mini-btn" onclick="AnimeSound.correct()">🔔 Pin-Pon! (Đúng)</button>
-        <button class="mini-btn" onclick="AnimeSound.wrong()">💢 Bubu~ (Sai)</button>
+      <div class="slider-row">
+        <label style="display:flex; justify-content:space-between; cursor:pointer;">
+          <span>🌸 Hiệu ứng cánh hoa rơi</span>
+          <input type="checkbox" id="chk-petals" checked onchange="App.togglePetals(this.checked)" />
+        </label>
+      </div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap; padding-top:6px; border-top:1px dashed var(--border-anime);">
+        <button class="mini-btn" onclick="AnimeSound.correct()">🔔 Pin-Pon!</button>
+        <button class="mini-btn" onclick="AnimeSound.wrong()">💢 Bubu~</button>
         <button class="mini-btn" onclick="AnimeSound.fanfare()">🎺 Fanfare!</button>
       </div>
     </div>
@@ -96,10 +106,10 @@
     <section class="view-section active" id="view-dashboard">
       <div class="hero-card">
         <div class="hero-content">
-          <span class="hero-kicker">✨ MỤC TIÊU CHINH PHỤC TOEIC 650+ CÙNG HINA-SENSEI</span>
+          <span class="hero-kicker">✨ GIAO DIỆN GIẤY KEM DỊU MẮT • MỤC TIÊU TOEIC 650+</span>
           <h1 class="hero-title">Chào mừng Senpai đến với Học Viện Sakura TOEIC! 🌸</h1>
           <p class="hero-desc">
-            Tích hợp đầy đủ <strong>Phòng Luyện Đọc Hiểu Song Ngữ (Part 5, 6, 7)</strong>, <strong>Phòng Luyện Viết TOEIC (Mô tả tranh, Email thương mại, Essay)</strong>, cùng trọn bộ <strong>30 Đề ETS 2024 • 2023 • 2022</strong> và <strong>174 Audio cắt lẻ</strong> với hiệu ứng âm thanh Anime vui tai!
+            Tích hợp đầy đủ <strong>Phòng Luyện Đọc Hiểu Song Ngữ (Part 5, 6, 7)</strong>, <strong>Phòng Luyện Viết TOEIC (Mô tả tranh, Email thương mại, Essay)</strong>, cùng trọn bộ <strong>30 Đề ETS 2024 • 2023 • 2022</strong> và <strong>174 Audio cắt lẻ</strong> với tông màu giấy ấm chống mỏi mắt!
           </p>
           <div class="hero-actions">
             <button class="btn-anime btn-primary" onclick="App.switchView('rw')">
@@ -121,7 +131,7 @@
       <!-- KPI / Progress Stats -->
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-icon" style="background:#ffe4f0;">🎯</div>
+          <div class="stat-icon" style="background:var(--sakura-light);">🎯</div>
           <div class="stat-info">
             <h4>Điểm Cao Nhất (Dự Kiến)</h4>
             <div class="stat-val" id="stat-best-score">0 / 990</div>
@@ -129,7 +139,7 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon" style="background:#e0f2fe;">📝</div>
+          <div class="stat-icon" style="background:var(--lavender-light);">📝</div>
           <div class="stat-info">
             <h4>Số Đề Đã Luyện</h4>
             <div class="stat-val" id="stat-tests-done">0 / 30 Đề</div>
@@ -137,7 +147,7 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon" style="background:#dcfce7;">✨</div>
+          <div class="stat-icon" style="background:var(--correct-bg);">✨</div>
           <div class="stat-info">
             <h4>Tổng Câu Đã Chấm</h4>
             <div class="stat-val" id="stat-questions-done">0 Câu</div>
@@ -145,7 +155,7 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon" style="background:#fef3c7;">🔥</div>
+          <div class="stat-icon" style="background:var(--sky-light);">🔥</div>
           <div class="stat-info">
             <h4>Cấp Độ Học Viên</h4>
             <div class="stat-val" id="stat-level-card">Lv.1 (0 EXP)</div>
@@ -156,21 +166,29 @@
 
       <!-- 3 Editions Grid -->
       <div class="section-header">
-        <h2 class="section-title">📚 Chọn Bộ Đề Để Bắt Đầu Luyện Tập</h2>
-        <span style="font-size:0.85rem; font-weight:700; color:var(--text-muted);">Click vào từng Test để mở Phòng Thi Đôi (PDF + Audio + Phiếu OMR tự chấm)</span>
+        <div>
+          <h2 class="section-title">📚 Chọn Bộ Đề Để Bắt Đầu Luyện Tập</h2>
+          <span style="font-size:0.84rem; color:var(--text-muted);">Click vào từng Test để mở Phòng Thi Đôi (PDF + Audio + Phiếu OMR tự chấm)</span>
+        </div>
+        <button class="btn-anime btn-reset" onclick="App.resetAllProgress()">
+          🔄 Reset Toàn Bộ Lịch Sử Học
+        </button>
       </div>
       <div class="editions-grid" id="dashboard-editions"></div>
     </section>
 
-    <!-- ==================== VIEW 2: READING & WRITING STUDIO (NEW!) ==================== -->
+    <!-- ==================== VIEW 2: READING & WRITING STUDIO ==================== -->
     <section class="view-section" id="view-rw">
       <div class="section-header">
         <div>
           <h2 class="section-title">📖✍️ Trung Tâm Luyện Đọc Hiểu (Part 5•6•7) & Luyện Viết TOEIC (Writing)</h2>
           <p style="font-size:0.88rem; color:var(--text-muted);">
-            Làm bài trực tiếp trên giao diện Web (không cần mở PDF), kèm <strong>bản dịch song ngữ Anh–Việt</strong>, <strong>giải thích ngữ pháp chi tiết</strong> và <strong>Chấm bài Viết tự động của Hina-sensei</strong>!
+            Làm bài trực tiếp trên nền giấy kem dịu mắt, kèm <strong>bản dịch song ngữ Anh–Việt</strong>, <strong>giải thích ngữ pháp chi tiết</strong> và <strong>Chấm bài Viết tự động của Hina-sensei</strong>!
           </p>
         </div>
+        <button class="btn-anime btn-reset" onclick="App.resetRwAll()">
+          🔄 Reset Toàn Bộ Đọc & Viết
+        </button>
       </div>
 
       <!-- Sub-navigation for Reading & Writing -->
@@ -272,9 +290,12 @@
                 <strong style="font-size:0.95rem;" id="omr-sheet-title">Phiếu OMR (200 Câu)</strong>
                 <div style="font-size:0.75rem; color:var(--text-muted);" id="omr-progress-text">Đã làm: 0/200 câu</div>
               </div>
-              <div class="timer-box" onclick="App.toggleExamTimer()" title="Click để Bắt đầu / Tạm dừng đồng hồ 120 phút">
-                ⏱️ <span id="exam-timer-display">120:00</span>
-                <span id="exam-timer-state" style="font-size:0.72rem; color:#fff;">(Chạy)</span>
+              <div class="timer-group">
+                <div class="timer-box" onclick="App.toggleExamTimer()" title="Click để Bắt đầu / Tạm dừng đồng hồ 120 phút">
+                  ⏱️ <span id="exam-timer-display">120:00</span>
+                  <span id="exam-timer-state" style="font-size:0.72rem; color:var(--sakura-pink);">(Chạy)</span>
+                </div>
+                <button class="mini-btn mini-reset" onclick="App.resetExamTimer()" title="Đặt lại đồng hồ về 120:00">🔄 Reset Giờ</button>
               </div>
             </div>
 
@@ -294,9 +315,16 @@
           <div class="omr-list" id="omr-questions-list"></div>
 
           <div class="omr-footer">
-            <button class="mini-btn" onclick="App.resetCurrentTest()">🗑️ Làm lại đề này</button>
-            <button class="btn-anime btn-primary" style="padding:8px 18px; font-size:0.86rem;" onclick="App.gradeCurrentTest()">
-              ✨ Chấm Điểm & Quy Đổi TOEIC 650+
+            <div style="display:flex; gap:6px;">
+              <button class="mini-btn mini-reset" onclick="App.resetCurrentTest()" title="Xóa toàn bộ 200 câu của đề này để làm lại">
+                🔄 Reset Đề Này
+              </button>
+              <button class="mini-btn" onclick="App.resetCurrentPart()" title="Chỉ xóa các câu thuộc Part đang xem">
+                🧹 Reset Part Đang Xem
+              </button>
+            </div>
+            <button class="btn-anime btn-primary" style="padding:8px 16px; font-size:0.84rem;" onclick="App.gradeCurrentTest()">
+              ✨ Chấm Điểm & Quy Đổi 650+
             </button>
           </div>
         </div>
@@ -309,9 +337,12 @@
         <div>
           <h2 class="section-title">🎧 Phòng Luyện Nghe Phản Xạ (Audio Cắt Lẻ Từng Câu & Từng Part)</h2>
           <p style="font-size:0.88rem; color:var(--text-muted);">
-            Tích hợp toàn bộ <strong>154 file nghe cắt riêng lẻ từng câu/cụm câu</strong> (Test 01, 04, 05, 09, 10) và <strong>20 file cắt theo Part (ETS 2024)</strong>. Nghe lặp lại, chọn đáp án và nhận hiệu ứng âm thanh <em>Pin-Pon!</em> tức thì!
+            Tích hợp toàn bộ <strong>154 file nghe cắt riêng lẻ từng câu/cụm câu</strong> (Test 01, 04, 05, 09, 10) và <strong>20 file cắt theo Part (ETS 2024)</strong>.
           </p>
         </div>
+        <button class="btn-anime btn-reset" onclick="App.resetDrillProgress()">
+          🔄 Reset Đáp Án & Ghi Chú Nghe
+        </button>
       </div>
 
       <div class="drill-layout">
@@ -330,7 +361,7 @@
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <div>
               <span class="edition-badge" id="drill-badge">Audio Cắt Riêng Lẻ</span>
-              <h3 style="font-size:1.35rem; margin-top:4px;" id="drill-clip-title">Chọn một đoạn băng bên trái để bắt đầu</h3>
+              <h3 style="font-size:1.3rem; margin-top:4px;" id="drill-clip-title">Chọn một đoạn băng bên trái để bắt đầu</h3>
             </div>
             <div style="display:flex; gap:8px;">
               <button class="mini-btn" onclick="App.prevDrillClip()">⏮ Câu trước</button>
@@ -355,9 +386,9 @@
             </label>
           </div>
 
-          <div style="background:var(--bg-main); border:2px solid var(--border-anime); border-radius:14px; padding:16px;">
+          <div style="background:var(--bg-main); border:1.5px solid var(--border-anime); border-radius:12px; padding:16px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-              <strong style="font-size:0.94rem;">🎯 Trả Lời Nhanh & Kiểm Tra Đáp Án:</strong>
+              <strong style="font-size:0.92rem;">🎯 Trả Lời Nhanh & Kiểm Tra Đáp Án:</strong>
               <div style="display:flex; gap:8px; align-items:center;">
                 <span style="font-size:0.78rem; font-weight:800;">Đối chiếu bộ Key:</span>
                 <select id="sel-drill-key-year" class="anime-select" style="padding:4px 8px; font-size:0.78rem;" onchange="App.renderDrillQuestions()">
@@ -365,16 +396,20 @@
                   <option value="2023">ETS 2023</option>
                   <option value="2024">ETS 2024</option>
                 </select>
+                <button class="mini-btn mini-reset" onclick="App.resetCurrentDrillClip()">🔄 Reset Câu Này</button>
               </div>
             </div>
             <div id="drill-questions-box" style="display:flex; flex-direction:column; gap:8px;"></div>
           </div>
 
           <div>
-            <label style="font-weight:900; font-size:0.86rem; display:block; margin-bottom:6px;">
-              ✍️ Góc Nghe Chép Chính Tả (Dictation) & Ghi Chú Từ Vựng:
-            </label>
-            <textarea id="drill-notes" rows="4" placeholder="Gõ lại những từ khóa bạn nghe được tại đây để tăng phản xạ Listening..." style="width:100%; border-radius:12px; border:2px solid var(--border-anime); padding:10px 14px; font-family:inherit; font-size:0.9rem; background:var(--bg-secondary); color:var(--text-main);"></textarea>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label style="font-weight:900; font-size:0.86rem;">
+                ✍️ Góc Nghe Chép Chính Tả (Dictation) & Ghi Chú Từ Vựng:
+              </label>
+              <button class="mini-btn mini-reset" onclick="document.getElementById('drill-notes').value=''; AnimeSound.click();">🗑️ Xóa ghi chú</button>
+            </div>
+            <textarea id="drill-notes" rows="4" placeholder="Gõ lại những từ khóa bạn nghe được tại đây để tăng phản xạ Listening..." class="writing-editor"></textarea>
           </div>
         </div>
       </div>
@@ -383,7 +418,7 @@
     <!-- ==================== VIEW 5: LIBRARY & 650+ STRATEGY GUIDE ==================== -->
     <section class="view-section" id="view-library">
       <div class="editions-grid">
-        <div class="edition-card" style="background:linear-gradient(145deg, var(--bg-card), var(--sakura-light));">
+        <div class="edition-card">
           <span class="edition-badge">🌸 CHIẾN THUẬT HINA-SENSEI</span>
           <h3>🎯 Công Thức Đạt TOEIC 650+ (Chỉ Cần ~132/200 Câu Đúng)</h3>
           <p>Bạn không cần phải làm đúng hết 200 câu! Để vượt mốc <strong>650–680 điểm</strong> (Listening ~350 + Reading ~315), hãy phân bổ chỉ tiêu như sau:</p>
@@ -412,10 +447,10 @@
       <div class="mascot-bubble" id="mascot-bubble">
         <div class="mascot-bubble-name">
           <span>🌸 Hina-sensei</span>
-          <span style="cursor:pointer; opacity:0.7;" onclick="App.triggerMascotRandomTip()">🎲 Mẹo mới</span>
+          <span style="cursor:pointer; opacity:0.75;" onclick="App.triggerMascotRandomTip()">🎲 Mẹo mới</span>
         </div>
         <div id="mascot-text">
-          Okaeri Senpai~! Mình vừa mở thêm khu "📖✍️ Luyện Đọc & Viết" cực xịn! Cùng khám phá ngay nhé! ✨
+          Giao diện giấy kem ấm mới cực dịu mắt luôn đó Senpai~! Cần làm mới bài tập lúc nào cứ bấm nút "🔄 Reset" nhé! ✨
         </div>
       </div>
       <button class="mascot-avatar-btn" onclick="App.triggerMascotRandomTip()" title="Click để trò chuyện với Hina-sensei!">
