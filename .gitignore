@@ -1,0 +1,35 @@
+# ============================================================================
+# 🌸 SAKURA TOEIC 650+ - GITHUB & GITHUB PAGES (.gitignore)
+# Ngăn lỗi giới hạn 100MB/file của GitHub & giới hạn 1GB của GitHub Pages
+# (Các file trên máy tính của bạn vẫn giữ nguyên 100% khi chạy start_web.bat)
+# ============================================================================
+
+# Hệ thống
+desktop.ini
+Thumbs.db
+.DS_Store
+node_modules/
+
+# Các file PDF/ZIP vượt quá giới hạn 100MB của GitHub (Bắt buộc ignore để push không lỗi)
+ETS 2024 - READING/ETS 2024 - READING.pdf
+ETS 2024 - LISTENING/ETS 2024 - LISTENING.pdf
+ĐÁP ÁN + TRANSCRIPT/Script - ETS 2024 LC.pdf
+AUDIO - ETS 2024/AUDIO CẮT TỪNG PART/AUDIO CẮT TỪNG PART.zip
+ETS 2023 Reading.pdf
+ETS 2022 Reading.pdf
+ETS 2023 Listening.pdf
+ETS 2022 Listening.pdf
+
+# Các thư mục Audio/PDF nặng khác (Giữ dung lượng repo ~220MB để GitHub Pages build nhanh < 1GB)
+# Giữ lại: Toàn bộ Web + Đọc/Viết + 154 file nghe cắt lẻ + Test 1 ETS 2024 (LC + RC + Audio Part 1-2) + Đáp án/Transcript
+Audio/
+AUDIO - ETS 2024/AUDIO - FULL TEST/
+AUDIO - ETS 2024/AUDIO CẮT TỪNG PART/PART 3/
+AUDIO - ETS 2024/AUDIO CẮT TỪNG PART/PART 4/
+ETS 2024 - LISTENING/TEST [2-9] LC (1).pdf
+ETS 2024 - LISTENING/TEST 10 LC (1).pdf
+ETS 2024 - READING/TEST [2-9] RC (1).pdf
+ETS 2024 - READING/TEST 10 RC (1).pdf
+SCRIPT LC ETS 2022.pdf
+ETS 2023 Transcript.pdf
+*.docx
